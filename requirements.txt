@@ -1,0 +1,3 @@
+# Python requirements for web_back project
+Flask
+Jinja2
