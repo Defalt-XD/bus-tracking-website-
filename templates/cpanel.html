@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #62b99c, #a2bdbb);
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .login-container {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 350px;
+            transform: scale(0.9);
+            animation: popUp 0.5s ease-in-out forwards;
+        }
+        @keyframes popUp {
+            from { transform: scale(0.9); }
+            to { transform: scale(1); }
+        }
+        .login-container h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            padding-left: 40px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            outline: none;
+            transition: 0.3s;
+        }
+        .input-group input:focus {
+            border-color: #89c2d9;
+            box-shadow: 0 0 5px rgba(137, 194, 217, 0.5);
+        }
+        .input-group i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #777;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background:  rgb(58, 109, 85);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+        .login-btn:hover {
+            background: #62b99c ;
+            transform: scale(1.05);
+        }
+       .flash-message {
+          margin: 10px auto;
+          padding: 10px 15px;
+          border-radius: 8px;
+          font-weight: bold;
+          width: fit-content;
+          font-size: 16px;
+       }
+       .flash-message.success {
+          color: #2ecc71; /* green */
+          background-color: #eafaf1;
+          border: 1px solid #2ecc71;
+        }
+        .flash-message.error {
+          color: #e74c3c; /* red */
+          background-color: #fdecea;
+          border: 1px solid #e74c3c;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h2>Admin Login</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+         <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form action="/admin_cpanel" method="POST">
+            <div class="input-group">
+                <i class="fa fa-user"></i>
+                <input type="text" placeholder="Username" name="username" required>
+            </div>
+            <div class="input-group">
+                <i class="fa fa-lock"></i>
+                <input type="password" placeholder="Password"  name="password" required>
+            </div>
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+    </div>
+</body>
+</html>

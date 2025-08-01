@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+
+        .notification-container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .notification-title {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2d89ef;
+            background-color: #eaf3ff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .notification-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            max-height: 350px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #007bff #eaf3ff;
+        }
+
+        .notification-list::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .notification-list::-webkit-scrollbar-thumb {
+            background: #007bff;
+            border-radius: 4px;
+        }
+
+        .notification-list::-webkit-scrollbar-track {
+            background: #eaf3ff;
+            border-radius: 4px;
+        }
+
+        .notification {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #ffffff;
+            border-left: 4px solid #007bff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .notification:hover {
+            transform: translateX(10px);
+        }
+
+        .notification .info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .notification .info .title {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .notification .info .description {
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        .notification i {
+            font-size: 2rem;
+            color: #007bff;
+            margin-right: 1rem;
+        }
+        @media (max-width: 768px) {
+            .notification {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+    {% endblock %}
+     
+    {% block main %}
+    <main class="main-content">
+        <div class="notification-container">
+            <h2 class="notification-title">Notifications</h2>
+
+            <div class="notification-list">
+                <!-- Example Notification -->
+                {% for values in results %}
+                <div class="notification">
+                    <i class='bx bx-bus'></i>
+                    
+                    <div class="info">
+                        <div class="title">{{values[0]}} --- {{values[1]}}</div>
+                        <div class="description">{{values[2]}}</div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+{% endblock %}

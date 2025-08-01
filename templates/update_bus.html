@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Bus Info</title>
+    <style>
+        /* Custom Fonts & Colors */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #62b99c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.3);
+            width: 450px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            background: #f3f3f3;
+            border-radius: 8px;
+            padding: 12px;
+            margin: 12px 0;
+        }
+
+        .input-container i {
+            margin-right: 10px;
+            color: #555;
+            font-size: 18px;
+        }
+
+        input {
+            width: 100%;
+            border: none;
+            outline: none;
+            background: transparent;
+            font-size: 16px;
+        }
+
+        input:focus {
+            background: #e6e6e6;
+        }
+
+        button {
+            background-color: #62b99c;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #4b927e;
+            transform: scale(1.05);
+        }
+
+        .flash-message {
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .flash-message.success {
+            background-color: #4caf50;
+        }
+
+        .flash-message.error {
+            background-color: #f44336;
+        }
+    </style>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-message {{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <h2><i class="fas fa-bus"></i> Update Bus Info</h2>
+        <form id="busForm" method="post" action="{{ url_for('update_bus') }}">
+            <div class="input-container">
+                <i class="fas fa-bus"></i>
+                <input type="text" name="bus_number" placeholder="Enter Bus Number" required>
+            </div>
+            <div class="input-container">
+                <i class="fas fa-users"></i>
+                <input type="number" name="capacity" placeholder="Enter  Capacity" required>
+            </div>
+            <div class="input-container">
+                <i class="fas fa-map-marker-alt"></i>
+                <input type="text" name="starting_point" placeholder="Enter Starting Point" required>
+            </div>
+            <div class="input-container">
+                <i class="fas fa-flag-checkered"></i>
+                <input type="text" name="destination_point" placeholder="Enter Destination Point" required>
+            </div>
+            <button type="submit"><i class="fas fa-check"></i> update</button>
+        </form>
+    </div>
+</body>
+</html>

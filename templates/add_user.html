@@ -1,0 +1,28 @@
+{% extends "base_user.html" %}
+
+{% block title %}Add User{% endblock %}
+{% block heading %} <i class="fas fa-user-plus"></i> Add a New User{% endblock %}
+{% block form_action %}{{ url_for('add_user') }}{% endblock %}
+{% block button_text %}Add User{% endblock %}
+
+{% block form_fields %}
+    <div class="input-container">
+        <i class="fas fa-id-card"></i>
+        <input type="text" name="std_id" placeholder="Enter Student ID" required>
+    </div>
+        <div class="input-container">
+        <i class="fas fa-id-card"></i>
+        <input type="email" name="email" placeholder="Enter Student email" required>
+    </div>
+
+    <div class="input-container">
+        <i class="fas fa-user"></i>
+        <input type="text" name="username" placeholder="Enter Username" required>
+    </div>
+
+    <div class="input-container">
+        <i class="fas fa-lock"></i>
+        <input type="password" , name="password" placeholder="Enter Password" required>
+        
+    </div>
+{% endblock %}

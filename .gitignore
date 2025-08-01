@@ -1,0 +1,7 @@
+# .gitignore for web_back project
+__pycache__/
+*.pyc
+.env
+.DS_Store
+/static/css/login.css
+/requirements.txt

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Locations</title>
+    <link href="https://cdn.jsdelivr.net/npm/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <style>
+        /* General Styles */
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4faff;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #72b39d;
+            padding: 1rem 2rem;
+            color: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .navbar .navbar-brand i {
+            margin-right: 0.5rem;
+            font-size: 1.8rem;
+        }
+
+        .navbar .navbar-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 1rem;
+            font-weight: bold;
+        }
+
+        .navbar a:hover {
+            text-decoration: underline;
+        }
+        .footer {
+            text-align: center;
+            padding: 1rem;
+            background-color: #72b39d;
+            color: white;
+            font-size: 1rem;
+            margin-top: auto;
+        }
+    </style>
+    {% block head %}{% endblock %}
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <i class='bx bx-bus'></i> Bus Tracker
+        </div>
+        <div class="navbar-links">
+            <a  id ="home"href="#">Home</a>
+            <a href="#">Profile</a>
+            <a href="{{ url_for('logout')}}" class="login-btn">Logout</a>
+        </div>
+    </nav>
+    {% block main%}
+    {% endblock %}
+       <footer class="footer">
+        &copy; 2025 Bus Tracker. All rights reserved.
+    </footer>
+
+</body>
+</html>
+<!-- The base.html file is the base template for the dashboard pages. It contains the header and footer sections
+  that are common to all dashboard pages. The header section includes a navigation bar with links to the home page,
+   profile page, and logout functionality. The footer section displays the copyright information. -->
+
+       

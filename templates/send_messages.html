@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Send Message</title>
+
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .message-container {
+            max-width: 500px;
+            margin: 60px auto;
+            background-color: #62b99c;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            padding: 32px 28px;
+            color: #fff;
+        }
+        .message-container h2 {
+            text-align: center;
+            margin-bottom: 24px;
+            font-size: 28px;
+        }
+        .form-label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: #fff;
+        }
+        .form-control {
+            width: 100%;
+            border-radius: 6px;
+            border: none;
+            padding: 10px 12px;
+            margin-bottom: 18px;
+            font-size: 1rem;
+        }
+        .form-control:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px #00bfa5;
+        }
+        .btn-send {
+            background-color: #00bfa5;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-send:hover {
+            background-color: #009688;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 18px;
+            color: #fff;
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        .back-link:hover {
+            color: #1c2331;
+        }
+        .icon {
+            margin-right: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="message-container">
+        <h2><i class="fas fa-paper-plane icon"></i>Send Message</h2>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} d-flex align-items-center" role="alert" style="margin-bottom:18px; border-radius:6px;">
+                    {% if category == 'success' %}
+                        <i class="fas fa-check-circle me-2"></i>
+                    {% else %}
+                        <i class="fas fa-exclamation-circle me-2"></i>
+                    {% endif %}
+                    <span>{{ message }}</span>
+                </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('send_message') }}"> <!-- Replace with your backend route -->
+            <label for="recipient" class="form-label"><i class="fas fa-user icon"></i>Recipient</label>
+            <input type="text" id="recipient" name="recipient" class="form-control" placeholder="Enter username or group" required>
+
+            <label for="subject" class="form-label"><i class="fas fa-heading icon"></i>Subject</label>
+            <input type="text" id="subject" name="subject" class="form-control" placeholder="Enter subject" required>
+
+            <label for="message" class="form-label"><i class="fas fa-envelope icon"></i>Message</label>
+            <textarea id="message" name="message" class="form-control" rows="5" placeholder="Type your message here..." required></textarea>
+
+            <button type="submit" class="btn-send"><i class="fas fa-paper-plane"></i> Send</button>
+        </form>
+
+        <a href="{{ url_for('admin_dashboard') }}" class="back-link"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+    </div>
+</body>
+</html>

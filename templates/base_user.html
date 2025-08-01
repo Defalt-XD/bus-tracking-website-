@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        /* Custom Fonts & Colors */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #62b99c;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+            width: 350px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: none;
+            outline: none;
+            border-radius: 8px;
+            background: #f3f3f3;
+            font-size: 16px;
+        }
+
+        input:focus {
+            background: #e6e6e6;
+        }
+
+        button {
+            background-color: #62b99c;
+            color: white;
+            border: none;
+            padding: 12px;
+            width: 100%;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #4b927e;
+            transform: scale(1.05);
+        }
+        .input-container {
+    display: flex;
+    align-items: center;
+    background: #f3f3f3;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 12px 0;
+}
+
+.input-container i {
+    margin-right: 10px;
+    color: #555;
+    font-size: 18px;
+}
+
+.input-container input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+}
+        .flash-message {
+            margin: 10px auto;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            width: fit-content;
+            font-size: 16px;
+        }
+        .flash-message.success {
+            color: #2ecc71; /* green */
+            background-color: #eafaf1;
+            border: 1px solid #2ecc71;
+        }
+        .flash-message.error {
+            color: #e74c3c; /* red */
+            background-color: #fdecea;
+            border: 1px solid #e74c3c;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>{% block heading %}User Management{% endblock %}</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        {% for category, message in messages %}
+            <div class="flash-message {{ category }}">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <form id="userForm" method="post" action="{% block form_action %}#{% endblock %}">
+            {% block form_fields %}{% endblock %}
+            <button type="submit">{% block button_text %}Submit{% endblock %}</button>
+        </form>
+    </div>
+</body>
+</html>

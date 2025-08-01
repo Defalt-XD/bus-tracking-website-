@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+        .main-content {
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .map-container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .map-title {
+            text-align: center;
+            font-size: 1.7rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2d89ef;
+            background-color: #eaf3ff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .map {
+            width: 100%;
+            height: 500px;
+            border-radius: 12px;
+        }
+
+        .bus-info {
+            margin-top: 1.5rem;
+            display: flex;
+            justify-content: space-between;
+            background-color: #f0fff4;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .bus-info div {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .bus-info i {
+            font-size: 1.5rem;
+            color: #28a745;
+            margin-right: 0.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .bus-info {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+   </style>
+   {% endblock %}
+   
+   {% block main %}
+    <main class="main-content">
+        <div class="map-container">
+            <h2 class="map-title">Real-Time Bus Locations</h2>
+            <div id="map" class="map"></div>
+        </div>
+
+        {% for bus in buses %}
+        <div class="bus-info">
+            <div><i class='bx bx-bus'></i> {{ bus.name }}: Arriving in {{ bus.eta }} minutes</div>
+            <div><i class='bx bx-map'></i> Current Location: {{ bus.location }}</div>
+            <div><i class='bx bx-route'></i> Destination: {{ bus.destination }}</div>
+        </div>
+        {% endfor %}
+    </main>
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap" async defer></script>
+    <script>
+        // Initialize Google Map
+        function initMap() {
+            const center = { lat: 31.5204, lng: 74.3587 }; // Example: Lahore
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: center
+            });
+            // Add bus markers
+            const buses = JSON.parse('{{ buses|tojson|safe }}');
+            buses.forEach(function(bus) {
+                new google.maps.Marker({
+                    position: { lat: bus.lat, lng: bus.lng },
+                    map: map,
+                    title: bus.name
+                });
+            });
+        }
+        // Google Maps API will call initMap automatically
+    </script>
+    {% endblock %}

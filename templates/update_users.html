@@ -1,0 +1,21 @@
+{% extends "base_user.html" %}
+{% block heading %} <i class="fas fa-user-edit"></i> update  User info {% endblock %}
+{% block form_action %}{{ url_for('update_user') }}{% endblock %}
+{% block button_text %}update User{% endblock %}
+
+{% block form_fields %}
+    <div class="input-container">
+        <i class="fas fa-id-card"></i>
+        <input type="text" name="std_id" placeholder="Enter Student ID" required>
+    </div>
+
+    <div class="input-container">
+        <i class="fas fa-user"></i>
+        <input type="text" name="username" placeholder="Enter Username" required>
+    </div>
+
+    <div class="input-container">
+        <i class="fas fa-lock"></i>
+        <input type="password" name="password" placeholder="Enter Password" required>
+    </div>
+{% endblock %}

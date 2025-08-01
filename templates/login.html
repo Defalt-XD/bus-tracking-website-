@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bus Tracking System - Login</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css')}}"> <!-- Link to the CSS file -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <style>
+    .flash-message {
+      margin: 10px auto;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-weight: bold;
+      width: fit-content;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .flash-message.success {
+      color: #2ecc71;
+      background-color: #eafaf1;
+      border: 1px solid #2ecc71;
+    }
+    .flash-message.error {
+      color: #e74c3c;
+      background-color: #fdecea;
+      border: 1px solid #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Bus Tracking System</h2>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="flash-message {{ category }}">
+          {% if category == 'success' %}<i class="fas fa-check-circle"></i>{% endif %}
+          {% if category == 'error' %}<i class="fas fa-times-circle"></i>{% endif %}
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <form action="/login_validation" method="POST" >
+      <div class="input-group">
+        <label for="username">Student ID</label>
+        <div style="position:relative;">
+          <i class="fas fa-user" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:#777;"></i>
+          <input type="text" id="username" name="std_id" required style="padding-left:32px;">
+        </div>
+      </div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <div style="position:relative;">
+          <i class="fas fa-lock" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:#777;"></i>
+          <input type="password" id="password" name="password" required style="padding-left:32px;">
+        </div>
+      </div>
+      <button id ="login"type="submit">Login</button>
+    </form>
+  </div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% block head %}
+
+<style>
+        .main-content {
+            padding: 2rem;
+            flex: 1;
+        }
+
+        .schedule-container {
+            background: #ffffff;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .schedule-title {
+            text-align: center;
+            font-size: 1.7rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #2d89ef;
+            background-color: #eaf3ff;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .schedule-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .schedule-item {
+            background-color: #f9f9f9;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-left: 4px solid #2d89ef;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            color: #333;
+        }
+
+        .schedule-item i {
+            color: #2d89ef;
+            margin-right: 0.5rem;
+        }
+
+    </style>
+   {% endblock %}
+   {% block main%}
+   <main class="main-content">
+    <div class="schedule-container">
+        <h2 class="schedule-title">Upcoming Bus Schedules</h2>
+        <ul class="schedule-list">
+            {% for stop in stops %}
+                <li class="schedule-item">
+                    <i class='bx bx-bus'></i>
+                    Bus Number: {{ stop[0] }} |
+                    starting: {{ stop[1] }} |
+                    Stop1: {{ stop[2] }} |
+                    Stop2: {{ stop[3]}} |
+                    Stop3: {{ stop[4]}} |
+                    Stop4: {{ stop[5]}} |
+                    End Time: {{ stop[6]}} 
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</main>
+
+{% endblock %}
